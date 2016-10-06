@@ -24,6 +24,7 @@ int yyline = 1;
 %option noyywrap
 
 WS          [ \t]
+INT         [1-9][0-9]*
 
 %%
 "/*"        {
@@ -45,6 +46,39 @@ WS          [ \t]
               }
             }
 
-.           { yERROR("Unknown token"); }
+[ \t\r]
+
+[\n]                                {yyline++;}                       
+
+"int"|"float"|"bool"|([ib]?"vec"[2-4])      {yTRACE(TOK_KEYWORD_TYPE)}
+
+"if"|"else"|"while"                 {yTRACE(TOK_KEYWORD_GRAMMAR)}
+
+"const"                 {yTRACE(TOK_KEYWORD_MODIFIER)}
+
+"+"|"-"|"*"|"/"|"="|"^"|"!"|">"|"<"|">="|"<="|"=="|"!="|"&&"|"||"   {yTRACE(TOK_OPERATOR)}
+
+[0]|([1-9][0-9]*)                 {yTRACE(TOK_LIT_INT)}
+
+(([0])|([1-9][0-9]*))"."[0-9]*          {yTRACE(TOK_LIT_FLOAT)}
+
+"true"|"false"              {yTRACE(TOK_LIT_BOOL)}
+
+"dp3"|"lit"|"rsq"           {yTRACE(TOK_FUNC)}
+
+[_a-zA-Z][_a-zA-Z0-9]*       {yTRACE(TOK_IDENT)}
+
+"{"                         {yTRACE(TOK_SCOPE_START)}
+"}"                         {yTRACE(TOK_SCOPE_END)}
+"["                         {yTRACE(TOK_REF_START)}
+"]"                         {yTRACE(TOK_REF_END)}
+"("                         {yTRACE(TOK_EXPR_START)}
+")"                         {yTRACE(TOK_EXPR_END)}
+
+";"                         {yTRACE(TOK_END_OF_STATEMENT)}
+
+","                         {yTRACE(TOK_SEPERATE)}
+
+.                           {yERROR("invalid token")}
 
 %%

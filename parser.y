@@ -18,13 +18,14 @@
 
 #include <string.h>
 #include "common.h"
+
 //#include "ast.h"
 //#include "symbol.h"
 //#include "semantic.h"
 #define YYERROR_VERBOSE
 #define yTRACE(x)    { if (traceParser) fprintf(traceFile, "%s\n", x); }
 
-void yyerror(char* s);    /* what to do in case of error            */
+void yyerror(const char* s);    /* what to do in case of error            */
 int yylex();              /* procedure for calling lexical analyzer */
 extern int yyline;        /* variable holding current line number   */
 
@@ -58,7 +59,17 @@ extern int yyline;        /* variable holding current line number   */
   int num;
 }
 // TODO:Replace myToken with your tokens, you can use these tokens in flex
-%token           myToken1 myToken2  
+%token          TOK_KEYWORD_TYPE    TOK_KEYWORD_GRAMMAR    TOK_KEYWORD_MODIFIER
+%token          TOK_OPERATOR
+%token          TOK_LIT_INT TOK_LIT_FLOAT TOK_LIT_BOOL
+%token          TOK_FUNC
+%token          TOK_SCOPE_START TOK_SCOPE_END TOK_REF_START TOK_REF_END TOK_EXPR_START TOK_EXPR_END
+%token          TOK_END_OF_STATEMENT
+%token          TOK_SEPERATE
+%token          TOK_IDENT
+
+
+
 
 
 %start    program
@@ -83,8 +94,8 @@ tokens
   ;
 // TODO: replace myToken with the token the you defined.
 token
-  :     myToken1 
-  |     myToken2                     
+  :      TOK_KEYWORD_TYPE    TOK_KEYWORD_GRAMMAR    TOK_KEYWORD_MODIFIER TOK_OPERATOR TOK_LIT_INT TOK_LIT_FLOAT TOK_LIT_BOOL TOK_FUNC TOK_SCOPE_START TOK_SCOPE_END TOK_REF_START TOK_REF_END TOK_EXPR_START TOK_EXPR_END
+  |      TOK_IDENT  TOK_END_OF_STATEMENT    TOK_SEPERATE
   ;
 
 
@@ -96,7 +107,7 @@ token
  * The given yyerror function should not be touched. You may add helper
  * functions as necessary in subsequent phases.
  ***********************************************************************/
-void yyerror(char* s) {
+void yyerror(const char* s) {
   if (errorOccurred)
     return;    /* Error has already been reported by scanner */
   else
