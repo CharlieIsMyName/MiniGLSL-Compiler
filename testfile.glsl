@@ -4,8 +4,8 @@
    vec4 eyeNorm;
    vec4 coeff;
    vec4 shade;
-   const vec4 lVec = env1; 
-   const vec4 lHalf = gl_Light_Half; 
+   const vec4 lVec = env1;
+   const vec4 lHalf = gl_Light_Half;
    const vec4 red = vec4(1.0,0.0,0.0,1.0);
    eyeNorm = fTex;
    eyeNorm[3] = dp3(eyeNorm,eyeNorm);
@@ -13,13 +13,17 @@
    eyeNorm = eyeNorm * eyeNorm[3];
    shade = gl_Light_Ambient * fCol;
    coeff[0] = dp3(lVec,eyeNorm);
-   coeff[1] = dp3(lHalf,eyeNorm); 
+   coeff[1] = dp3(lHalf,eyeNorm);
    coeff[3] = gl_Material_Shininess[0];
    coeff = lit(coeff);
    shade = shade + coeff[1] * fCol;
-   shade = shade + coeff[2] * fCol;   
+   shade = shade + coeff[2] * fCol;
    gl_FragColor = shade;
-
+   a=-123;
+   b=-103.52;
+	k=-139081209381239810923801928309182309810923812348712348917324098712340891723408917324078.01
+   aasdfjhadsfkjahsdfkjahsdflkjadshflakjdsfhlkjhasdflkjahsdfljkhadsflkjhasdkfjh=91827238472349827349827349723498723497234987987
+	
 }
 
 

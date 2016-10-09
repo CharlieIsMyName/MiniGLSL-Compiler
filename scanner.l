@@ -15,7 +15,7 @@
 #define YY_USER_INIT { yyin = inputFile; }
 #define	yyinput      input
 #define yTRACE(x)    {  printLex(x); }
-#define yERROR(x)    { fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: %s\n", yyline, x); errorOccurred = TRUE; yyterminate(); }
+#define yERROR(x)    { fprintf(errorFile, "\nLEXICAL ERROR AT TOKEN %s, LINE %d: %s\n", yytext, yyline, x); errorOccurred = TRUE; yyterminate(); }
 
 int CheckInt(void);
 int yyline = 1;
@@ -54,19 +54,37 @@ INT         [1-9][0-9]*
 
 "if"|"else"|"while"                 {yTRACE(TOK_KEYWORD_GRAMMAR)}
 
-"const"                 {yTRACE(TOK_KEYWORD_MODIFIER)}
+"const"                 {yTRACE(TOK_KEYWORD_QUALIFIER)}
 
 "+"|"-"|"*"|"/"|"="|"^"|"!"|">"|"<"|">="|"<="|"=="|"!="|"&&"|"||"   {yTRACE(TOK_OPERATOR)}
 
-[0]|([1-9][0-9]*)                 {yTRACE(TOK_LIT_INT)}
+"-"?[0]|("-"?[1-9][0-9]*)               	{
+							long int value=strtol(yytext,NULL,10);
+							if((errno==ERANGE)||((short)value!=value)){
+								yERROR("Invalid integer literal. The value might be out of range.");	
+							}
+							yTRACE(TOK_LIT_INT);
+						}
 
-(([0])|([1-9][0-9]*))"."[0-9]*          {yTRACE(TOK_LIT_FLOAT)}
+(("-"?[0])|("-"?[1-9][0-9]*))"."[0-9]*          {
+							float fvalue=strtof(yytext,NULL);
+							if((errno==ERANGE)){
+								yERROR("Invalid floating point literal. The value might be out of range.");	
+							}
+							yTRACE(TOK_LIT_FLOAT);
+						}
 
 "true"|"false"              {yTRACE(TOK_LIT_BOOL)}
 
 "dp3"|"lit"|"rsq"           {yTRACE(TOK_FUNC)}
 
-[_a-zA-Z][_a-zA-Z0-9]*       {yTRACE(TOK_IDENT)}
+[_a-zA-Z][_a-zA-Z0-9]*       			{
+							if(strlen(yytext)>MAX_IDENTIFIER){
+								yERROR("Identifier name exceeds maximum allowed length");
+								break;
+							}
+							yTRACE(TOK_IDENT);
+						}
 
 "{"                         {yTRACE(TOK_SCOPE_START)}
 "}"                         {yTRACE(TOK_SCOPE_END)}
@@ -79,7 +97,7 @@ INT         [1-9][0-9]*
 
 ","                         {yTRACE(TOK_SEPERATE)}
 
-.                           {yERROR("invalid token")}
+.                           {yERROR("Invalid token")}
 
 %%
 
@@ -94,18 +112,24 @@ void printLex(int x){
 			case TOK_KEYWORD_GRAMMAR:
 				fprintf(traceFile, "TOKEN TOK_KEYWORD_GRAMMAR : %s\n", yytext);
 				break;
-			case TOK_KEYWORD_MODIFIER:
-				fprintf(traceFile, "TOKEN TOK_KEYWORD_MODIFIER : %s\n", yytext);
+			case TOK_KEYWORD_QUALIFIER:
+				fprintf(traceFile, "TOKEN TOK_KEYWORD_QUALIFIER : %s\n", yytext);
 				break;
 			case TOK_OPERATOR:
 				fprintf(traceFile, "TOKEN TOK_OPERATOR : %s\n", yytext);
 				break;
-			case TOK_LIT_INT:
-				fprintf(traceFile, "TOKEN TOK_LIT_INT : %s\n", yytext);
+			case TOK_LIT_INT:{
+				long int value=strtol(yytext,NULL,10);
+				fprintf(traceFile, "TOKEN TOK_LIT_INT : %s with value of %d\n", yytext,(short)value);
 				break;
-			case TOK_LIT_FLOAT:
-				fprintf(traceFile, "TOKEN TOK_LIT_FLOAT : %s\n", yytext);
+			}
+				
+			case TOK_LIT_FLOAT:{
+				float fvalue=strtof(yytext,NULL);
+				fprintf(traceFile, "TOKEN TOK_LIT_FLOAT : %s with actual value of %f\n", yytext,fvalue);
 				break;
+			}
+				
 			case TOK_LIT_BOOL:
 				fprintf(traceFile, "TOKEN TOK_LIT_BOOL : %s\n", yytext);
 				break;

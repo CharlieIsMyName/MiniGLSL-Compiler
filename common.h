@@ -6,27 +6,30 @@
  * common definitions that are used throughout the compiler.
  **********************************************************************/
 
-#ifndef _COMMON_H_ 
-#define _COMMON_H_ 
+#ifndef _COMMON_H_
+#define _COMMON_H_
 
 #include <stdio.h> /* for FILE */
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
- 
 /**********************************************************************
  * Some useful definitions. These may be modified or removed as needed.
- *********************************************************************/ 
+ *********************************************************************/
 #ifndef TRUE
 # define TRUE  1
 #endif
 #ifndef FALSE
 # define FALSE 0
 #endif
- 
+
 #define MAX_IDENTIFIER 32
 #define MAX_TEXT       256
 #define MAX_INTEGER    32767
+//for now the floating point we allow is double precision
 
-/********************************************************************** 
+/**********************************************************************
  * External declarations for variables declared in globalvars.c.
  **********************************************************************/
 extern FILE * inputFile;

@@ -47,7 +47,7 @@ void  sourceDump(void);
 extern int   yylex(void);
 extern char *yytext;
 extern int   yyline;
- 
+
 
 /* Phase 2: Parser Interface. Merely uncomment the following line */
 extern int yyparse(void);
@@ -76,10 +76,11 @@ int main (int argc, char *argv[]) {
 /* Phase 1: Scanner. In phase 2 and after the following code should be
  * removed */
 
+/*
   while (yylex())
     if (errorOccurred)
       break;
- 
+ */
 
 /* Phase 2: Parser -- should allocate an AST, storing the reference in the
  * global variable "ast", and build the AST there. */
@@ -92,7 +93,7 @@ int main (int argc, char *argv[]) {
 /* TODO: call your code generation routine here */
 //  if (errorOccurred)
 //    fprintf(outputFile,"Failed to compile\n");
-//  else 
+//  else
 //    genCode(ast);
 
 /***********************************************************************
@@ -231,7 +232,7 @@ void getOpts (int numargs, char **argstr) {
 }
 
 /***********************************************************************
- * Utility for opening files 
+ * Utility for opening files
  **********************************************************************/
 FILE *fileOpen (char *fileName, char *fileMode, FILE *defaultFile) {
   FILE * fTemp;
