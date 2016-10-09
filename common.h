@@ -27,7 +27,7 @@
 #define MAX_IDENTIFIER 32
 #define MAX_TEXT       256
 #define MAX_INTEGER    32767
-//for now the floating point we allow is double precision
+//for now we only allow single precision floating point and 16-bit short integer
 
 /**********************************************************************
  * External declarations for variables declared in globalvars.c.
