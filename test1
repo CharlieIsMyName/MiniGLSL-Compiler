@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./compiler467 -Tn
+./compiler467 -Tn <testfile.glsl

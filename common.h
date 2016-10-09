@@ -48,6 +48,7 @@ extern int dumpAST;
 extern int dumpSymbols;
 extern int dumpInstructions;
 
+void printLex(int x);
 
 
 

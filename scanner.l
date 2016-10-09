@@ -14,7 +14,7 @@
 
 #define YY_USER_INIT { yyin = inputFile; }
 #define	yyinput      input
-#define yTRACE(x)    { if (traceScanner) fprintf(traceFile, "TOKEN %3d : %s\n", x, yytext); }
+#define yTRACE(x)    {  printLex(x); }
 #define yERROR(x)    { fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: %s\n", yyline, x); errorOccurred = TRUE; yyterminate(); }
 
 int CheckInt(void);
@@ -82,3 +82,67 @@ INT         [1-9][0-9]*
 .                           {yERROR("invalid token")}
 
 %%
+
+
+void printLex(int x){
+	if (traceScanner){
+	
+		switch(x){
+			case TOK_KEYWORD_TYPE:
+				fprintf(traceFile, "TOKEN TOK_KEYWORD_TYPE : %s\n", yytext);
+				break;
+			case TOK_KEYWORD_GRAMMAR:
+				fprintf(traceFile, "TOKEN TOK_KEYWORD_GRAMMAR : %s\n", yytext);
+				break;
+			case TOK_KEYWORD_MODIFIER:
+				fprintf(traceFile, "TOKEN TOK_KEYWORD_MODIFIER : %s\n", yytext);
+				break;
+			case TOK_OPERATOR:
+				fprintf(traceFile, "TOKEN TOK_OPERATOR : %s\n", yytext);
+				break;
+			case TOK_LIT_INT:
+				fprintf(traceFile, "TOKEN TOK_LIT_INT : %s\n", yytext);
+				break;
+			case TOK_LIT_FLOAT:
+				fprintf(traceFile, "TOKEN TOK_LIT_FLOAT : %s\n", yytext);
+				break;
+			case TOK_LIT_BOOL:
+				fprintf(traceFile, "TOKEN TOK_LIT_BOOL : %s\n", yytext);
+				break;
+			case TOK_FUNC:
+				fprintf(traceFile, "TOKEN TOK_FUNC : %s\n", yytext);
+				break;
+			case TOK_IDENT:
+				fprintf(traceFile, "TOKEN TOK_IDENT : %s\n", yytext);
+				break;
+			case TOK_SCOPE_START:
+				fprintf(traceFile, "TOKEN TOK_SCOPE_START : %s\n", yytext);
+				break;
+			case TOK_SCOPE_END:
+				fprintf(traceFile, "TOKEN TOK_SCOPE_END : %s\n", yytext);
+				break;
+			case TOK_REF_START:
+				fprintf(traceFile, "TOKEN TOK_REF_START : %s\n", yytext);
+				break;
+			case TOK_REF_END:
+				fprintf(traceFile, "TOKEN TOK_REF_END : %s\n", yytext);
+				break;
+			case TOK_EXPR_START:
+				fprintf(traceFile, "TOKEN TOK_EXPR_START : %s\n", yytext);
+				break;
+			case TOK_EXPR_END:
+				fprintf(traceFile, "TOKEN TOK_EXPR_END : %s\n", yytext);
+				break;
+			case TOK_END_OF_STATEMENT:
+				fprintf(traceFile, "TOKEN TOK_END_OF_STATEMENT : %s\n", yytext);
+				break;
+			case TOK_SEPERATE:
+				fprintf(traceFile, "TOKEN TOK_SEPERATE : %s\n", yytext);
+				break;
+
+		}
+
+	
+	}
+
+}
