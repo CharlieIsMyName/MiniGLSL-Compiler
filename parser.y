@@ -1,7 +1,11 @@
 %{
 /***********************************************************************
  * --YOUR GROUP INFO SHOULD GO HERE--
- * 
+ * GROUP NUMBER g467-007
+ * GROUP MEMBER:
+ *               Chenyu Wang    wangc148    1001609226
+ *               Jixiong Deng   dengjixi    1001304741
+ *
  *   Interface to the parser module for CSC467 course project.
  * 
  *   Phase 2: Implement context free grammar for source language, and

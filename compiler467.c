@@ -1,6 +1,10 @@
 /***********************************************************************
  * **YOUR GROUP INFO SHOULD GO HERE**
- *
+ * GROUP NUMBER g467-007
+ * GROUP MEMBER:
+ *               Chenyu Wang    wangc148    1001609226
+ *               Jixiong Deng   dengjixi    1001304741
+ * 
  * compiler467.c
  *
  * This is the main driver program for the CSC467F course project
