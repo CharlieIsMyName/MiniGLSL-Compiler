@@ -21,8 +21,39 @@
    gl_FragColor = shade;
    a=-123;
    b=-103.52;
-	k=-139081209381239810923801928309182309810923812348712348917324098712340891723408917324078.01
-   aasdfjhadsfkjahsdfkjahsdflkjadshflakjdsfhlkjhasdflkjahsdfljkhadsflkjhasdkfjh=91827238472349827349827349723498723497234987987
+   bcs = 0.3
+   int dp3(ivec3,ivec3);
+   abs = 3;
+   
+   dasd = *0.4;
+   
+   ivec 385.0;
+   
+   vec _string;
+1<3;
+1<da;
+	0;
+	float lol 1.23;
+	
+	
+	lol.stupid;
+	lol4.78
+	1my_identifier0123
+	3.0_thisIDT
+	1...abc
+	1.ab.0;
+
+
+
+	1.0ab;
+	1.ab;	
+	"idf"
+	3_
+	1_ab;
+	1.0fdasf3.0;
+ 	1dasvec2;
+	vec 00;
+	sb = 5E8; k=-139081209381239810923801928309182309810923812348712348917324098712340891723408917324078.01 aasdfjhadsfkjahsdfkjahsdflkjadshflakjdsfhlkjhasdflkjahsdfljkhadsflkjhasdkfjh=91827238472349827349827349723498723497234987987
 	
 }
 
