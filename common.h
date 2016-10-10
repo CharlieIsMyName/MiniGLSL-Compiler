@@ -1,6 +1,9 @@
 /***********************************************************************
  * **YOUR GROUP INFO SHOULD GO HERE**
- *
+ * GROUP NUMBER g467-007
+ * GROUP MEMBER:
+ *               Chenyu Wang    wangc148    1001609226
+ *               Jixiong Deng   dengjixi    1001304741
  * common.h
  *
  * common definitions that are used throughout the compiler.
@@ -27,7 +30,7 @@
 #define MAX_IDENTIFIER 32
 #define MAX_TEXT       256
 #define MAX_INTEGER    32767
-//for now we only allow single precision floating point and 16-bit short integer
+//for now the floating point we allow is double precision
 
 /**********************************************************************
  * External declarations for variables declared in globalvars.c.
